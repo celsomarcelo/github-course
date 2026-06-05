@@ -10,7 +10,7 @@ mostrar_menu() {
     echo "2) Definir DNS Ailos (10.204.0.99 / 8.8.8.8)"
     echo "3) Definir DNS Ailos (10.41.200.50 / 8.8.8.8)"
     echo "4) Restaurar DNS Padrão (Automático/DHCP)"
-    echo "5) Limpar Cache DNS (Flush DNS)"
+    echo "5) Limpar Cache DNS (Flush DNS) - sudo"
     echo "6) Passando Empty para o DNS"
     echo "7) Sair"
     echo "----------------------------------------------"
@@ -23,7 +23,7 @@ mostrar_menu() {
 
 while true; do
     mostrar_menu
-    read -p "Escolha uma opção [1-7]: " opcao
+    read -p "Escolha uma opção [1-6]: " opcao
 
     case $opcao in
         1)
@@ -36,22 +36,25 @@ while true; do
             ;;
         2)
             echo "Configurando DNS Ailos para: Wi-Fi..."
+            networksetup -setdnsservers Wi-Fi '10.204.0.99'
             #sudo networksetup -setdnsservers "Wi-Fi" 10.204.0.99 8.8.8.8
-            sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+            #sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
             echo -e "\033[32mDNS Ailos configurado com sucesso!\033[0m"
             read -p "Pressione Enter para continuar..."
             ;;
         3)
             echo "Configurando DNS Ailos para: Wi-Fi..."
-            sudo networksetup -setdnsservers "Wi-Fi" 10.41.200.50 8.8.8.8
-            sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+            networksetup -setdnsservers Wi-Fi '10.41.200.50'
+            #sudo networksetup -setdnsservers "Wi-Fi" 10.41.200.50 8.8.8.8
+            #sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
             echo -e "\033[32mDNS Ailos configurado com sucesso!\033[0m"
             read -p "Pressione Enter para continuar..."
             ;;            
         4)
             echo "Restaurando DNS para modo automático..."
-            sudo networksetup -setdnsservers "Wi-Fi" Empty
-            sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+            networksetup -setdnsservers Wi-Fi 'Empty'
+            #sudo networksetup -setdnsservers "Wi-Fi" Empty
+            #sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
             echo -e "\033[32mDNS restaurado para DHCP!\033[0m"
             read -p "Pressione Enter para continuar..."
             ;;
@@ -62,12 +65,6 @@ while true; do
             read -p "Pressione Enter para continuar..."
             ;;
         6)
-            echo "Passando Empty para o DNS"
-            networksetup -setdnsservers Wi-Fi 'Empty'
-            echo -e "\033[32mEmpty passado!\033[0m"
-            read -p "Pressione Enter para continuar..."
-            ;;
-        7)
             echo "Saindo..."
             exit 0
             ;;
