@@ -23,12 +23,12 @@ mostrar_menu() {
 
 while true; do
     mostrar_menu
-    read -p "Escolha uma opção [1-6]: " opcao
+    read -p "Escolha uma opção [1-7]: " opcao
 
     case $opcao in
         1)
             echo "Configurando DNS Ailos para: Wi-Fi..."
-            networksetup -setdnsservers Wi-Fi '10.41.204.120 8.8.8.8'
+            networksetup -setdnsservers Wi-Fi '10.41.204.120'
             #sudo networksetup -setdnsservers "Wi-Fi" 10.41.204.120 8.8.8.8
             #sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
             echo -e "\033[32mDNS Ailos configurado com sucesso!\033[0m"
@@ -36,7 +36,7 @@ while true; do
             ;;
         2)
             echo "Configurando DNS Ailos para: Wi-Fi..."
-            sudo networksetup -setdnsservers "Wi-Fi" 10.204.0.99 8.8.8.8
+            #sudo networksetup -setdnsservers "Wi-Fi" 10.204.0.99 8.8.8.8
             sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
             echo -e "\033[32mDNS Ailos configurado com sucesso!\033[0m"
             read -p "Pressione Enter para continuar..."
