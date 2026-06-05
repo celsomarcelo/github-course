@@ -11,8 +11,7 @@ mostrar_menu() {
     echo "3) Definir DNS Ailos (10.41.200.50 / 8.8.8.8)"
     echo "4) Restaurar DNS Padrão (Automático/DHCP)"
     echo "5) Limpar Cache DNS (Flush DNS) - sudo"
-    echo "6) Passando Empty para o DNS"
-    echo "7) Sair"
+    echo "6) Sair"
     echo "----------------------------------------------"
 }
 
